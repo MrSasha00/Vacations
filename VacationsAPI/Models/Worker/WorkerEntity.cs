@@ -28,9 +28,9 @@ namespace VacationsAPI.Models.Worker
         [BsonElement]
         public List<Guid> Vacations { get; set; }
         [BsonConstructor]
-        public WorkerEntity(string firstName, string midName, string lastName, string position, Guid departmentId)
+        public WorkerEntity(Guid workerId,string firstName, string midName, string lastName, string position, Guid departmentId)
         {
-            WorkerId = Guid.NewGuid();
+            WorkerId = workerId;
             FirstName = firstName;
             MidName = midName;
             LastName = lastName;

@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using VacationsAPI.Models.Department;
 using VacationsAPI.Models.Vacation;
@@ -13,6 +10,8 @@ namespace VacationsAPI.Controllers
 {
     public class CreateWorkerDTO
     {
+        [Required]
+        public Guid WorkerId { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -56,7 +55,7 @@ namespace VacationsAPI.Controllers
             {
                 return BadRequest();
             }
-            var worker = new WorkerEntity(createdWorker.FirstName, createdWorker.MidName ,createdWorker.LastName, createdWorker.Position, createdWorker.DepartmentId);
+            var worker = new WorkerEntity(createdWorker.WorkerId, createdWorker.FirstName, createdWorker.MidName ,createdWorker.LastName, createdWorker.Position, createdWorker.DepartmentId);
             await _workerRepository.Insert(worker);
             var department = await _departmentRepository.Get(createdWorker.DepartmentId);
             if(department == null)

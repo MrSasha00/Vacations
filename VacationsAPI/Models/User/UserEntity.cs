@@ -11,11 +11,15 @@ namespace VacationsAPI.Models.User
         public string Login { get; set; }
         [BsonElement]
         public string Password { get; set; }
+        [BsonElement]
+        public Guid IdWorker { get; set; }
 
+        [BsonConstructor]
         public UserEntity(string login, string password)
         {
             Login = login;
             Password = password;
+            IdWorker = Guid.NewGuid();
         }
     }
 }
