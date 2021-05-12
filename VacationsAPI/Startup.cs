@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MongoDB.Bson;
 using VacationsAPI.Models.Department;
+using VacationsAPI.Models.User;
 using VacationsAPI.Models.Vacation;
 using VacationsAPI.Models.Worker;
 
@@ -85,6 +86,13 @@ namespace VacationsAPI
                 sp.GetRequiredService<IOptions<VacationDatabaseSettings>>().Value);
             //Подключение MongoVacationRepository
             services.AddSingleton<MongoVacationRepository>();
+            
+            services.Configure<UserDatabaseSettings>(
+                Configuration.GetSection(nameof(UserDatabaseSettings)));
+            services.AddSingleton<IUserDatabaseSettings>(sp =>
+                sp.GetRequiredService<IOptions<UserDatabaseSettings>>().Value);
+            //Подключение MongoVacationRepository
+            services.AddSingleton<MongoUserRepository>();
         }
     }
 }
