@@ -28,7 +28,7 @@ namespace VacationsAPI.Controllers
             _workerRepository = workerRepository;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] UserDTO user)
         {
             if (user == null)
@@ -40,7 +40,7 @@ namespace VacationsAPI.Controllers
             return Created("api/[controller]" + newUser.Login, newUser.Password);
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserDTO logUser)
         {
             if (logUser == null)
